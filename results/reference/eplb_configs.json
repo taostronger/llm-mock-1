@@ -1,0 +1,212 @@
+[
+  {
+    "case": "steady",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 31,
+    "scenario": "steady",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "steady",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 47,
+    "scenario": "steady",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "steady",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 89,
+    "scenario": "steady",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "shift",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 31,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "shift",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 47,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "shift",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 89,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "oscillate",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 31,
+    "scenario": "oscillate",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "oscillate",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 47,
+    "scenario": "oscillate",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "oscillate",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 89,
+    "scenario": "oscillate",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "uniform",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 31,
+    "scenario": "uniform",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "uniform",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 47,
+    "scenario": "uniform",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "uniform",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 89,
+    "scenario": "uniform",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "scale_4",
+    "experts": 16,
+    "ranks": 4,
+    "capacity": 6,
+    "seed": 31,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "scale_4",
+    "experts": 16,
+    "ranks": 4,
+    "capacity": 6,
+    "seed": 47,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "scale_4",
+    "experts": 16,
+    "ranks": 4,
+    "capacity": 6,
+    "seed": 89,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "scale_16",
+    "experts": 64,
+    "ranks": 16,
+    "capacity": 6,
+    "seed": 31,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "scale_16",
+    "experts": 64,
+    "ranks": 16,
+    "capacity": 6,
+    "seed": 47,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "scale_16",
+    "experts": 64,
+    "ranks": 16,
+    "capacity": 6,
+    "seed": 89,
+    "scenario": "shift",
+    "copy_ms": 0.15,
+    "steps": 360
+  },
+  {
+    "case": "costly_shift",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 31,
+    "scenario": "shift",
+    "copy_ms": 1.5,
+    "steps": 360
+  },
+  {
+    "case": "costly_shift",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 47,
+    "scenario": "shift",
+    "copy_ms": 1.5,
+    "steps": 360
+  },
+  {
+    "case": "costly_shift",
+    "experts": 32,
+    "ranks": 8,
+    "capacity": 6,
+    "seed": 89,
+    "scenario": "shift",
+    "copy_ms": 1.5,
+    "steps": 360
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "routing_runs": 120,
+  "eplb_runs": 63,
+  "common_trace_groups": 30,
+  "recomputed": "causality, decomposition, means, P95, APC, migration, conservation, source hashes"
+}

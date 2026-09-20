@@ -1,0 +1,24 @@
+{
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "routing_runs": 120,
+  "eplb_runs": 63,
+  "simulation_only": true,
+  "seeds": [
+    31,
+    47,
+    89
+  ],
+  "code_sha256": {
+    "src/llm_repro/__init__.py": "f78ef9e7e4c2518becf892735e5b73f4962dae1a6a5d1c2f21e8484c981c9960",
+    "src/llm_repro/eplb.py": "f97f937b62abb8e143746a37e5a236a6f3fbdd4986d69722777fffae16ba72c9",
+    "src/llm_repro/routing.py": "f428f3b031937f0acc48a57241c15ed973d48a26dd332a878e70ba5674cf02d4",
+    "src/llm_repro/vendor/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/llm_repro/vendor/omni_eplb_static.py": "74529bf698b62b4d377d2bbd32724ebe6ce9548be39f9db244ede65c4ad6e6be",
+    "scripts/run_experiments.py": "e5d657b886a2dd2c113060179d8c2c184921077603c07d651211b71b36283b6b",
+    "scripts/verification/cache_checks.py": "89ebd250c2ed60c9410ec8eed91554bc1d8f3ac72e01432ac65b3075bce3907c",
+    "scripts/verification/placement_checks.py": "ccf4a87bfc73d34e40ff476d06600266f9b4455b58aa53b9f915cccdb6889e2d",
+    "scripts/verification/queue_checks.py": "aee6da70f5a0f075248ebb8e58e075e4c3dcc1470cf542e82b4a0337ea119560",
+    "scripts/verification/session_switch_checks.py": "8f495755438dcd0650ddad7eebdcb6b2300cf0846e88c48493cb15fe20832476"
+  }
+}

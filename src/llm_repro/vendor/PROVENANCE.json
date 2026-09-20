@@ -1,0 +1,11 @@
+{
+  "repository": "https://gitee.com/omniai/omni-eplb",
+  "commit": "bb5122d117e9a63ecdf555240dba79c75be74393",
+  "source_file": "utils/omni_pattern_tool/step_2_placement_pattern_generation.py",
+  "source_sha256": "13b795bba95e08c157f8f0b41cbceecaef995f5aaee25b24b2d9b1df2fb43e54",
+  "extracted_functions": [
+    "allocate_expert_deployments_improved",
+    "distribute_experts_to_ranks"
+  ],
+  "changes": "Only imports/header extracted; function bodies unchanged. Feasibility fallback and timing model live outside vendor module."
+}

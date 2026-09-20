@@ -1,0 +1,66 @@
+{
+  "seed": 20260918,
+  "model": "independent FCFS M/G/1 queues; fixed independent routing probabilities",
+  "kkt_checks": 1000,
+  "max_rate_sum_error": 3.552713678800501e-15,
+  "max_kkt_residual": 5.6843418860808015e-12,
+  "mm1_example": [
+    {
+      "method": "uniform",
+      "rates": [
+        1.3333333333333333,
+        1.3333333333333333,
+        1.3333333333333333
+      ],
+      "rho": [
+        1.3333333333333333,
+        0.6666666666666666,
+        0.3333333333333333
+      ],
+      "mean_response_s": null
+    },
+    {
+      "method": "capacity_proportional",
+      "rates": [
+        0.5714285714285714,
+        1.1428571428571428,
+        2.2857142857142856
+      ],
+      "rho": [
+        0.5714285714285714,
+        0.5714285714285714,
+        0.5714285714285714
+      ],
+      "mean_response_s": 0.9999999999999998
+    },
+    {
+      "method": "marginal_cost_optimal",
+      "rates": [
+        0.3203772410170408,
+        1.038868276948878,
+        2.6407544820340814
+      ],
+      "rho": [
+        0.3203772410170408,
+        0.519434138474439,
+        0.6601886205085203
+      ],
+      "mean_response_s": 0.8737734478532142
+    }
+  ],
+  "grid": {
+    "step": 0.01,
+    "feasible_points": 19999,
+    "best_response_s": 0.8737745098039216,
+    "rates": [
+      0.32,
+      1.04,
+      2.6399999999999997
+    ]
+  },
+  "snapshot_checks": 50000,
+  "snapshot_violations": 0,
+  "switch_checks": 50000,
+  "switch_accepted": 17015,
+  "switch_false_accepts": 0
+}

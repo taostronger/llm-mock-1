@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "name": "原端缓存收益较大",
+      "stay": 0.8999999999999999,
+      "move": 1.1500000000000001,
+      "threshold": 0.8500000000000001,
+      "switch": false,
+      "gain": -0.2500000000000002
+    },
+    {
+      "name": "原端复用较少",
+      "stay": 1.6,
+      "move": 1.1500000000000001,
+      "threshold": 0.15000000000000005,
+      "switch": true,
+      "gain": 0.44999999999999996
+    },
+    {
+      "name": "新端公共前缀更多",
+      "stay": 0.49999999999999994,
+      "move": 0.25,
+      "threshold": -0.049999999999999975,
+      "switch": true,
+      "gain": 0.24999999999999994
+    },
+    {
+      "name": "新端速率减半",
+      "stay": 1.3,
+      "move": 2.15,
+      "threshold": 1.2500000000000002,
+      "switch": false,
+      "gain": -0.8499999999999999
+    },
+    {
+      "name": "等待更长但完整代价更低",
+      "stay": 0.9,
+      "move": 0.75,
+      "threshold": -0.25000000000000006,
+      "switch": true,
+      "gain": 0.15000000000000002
+    }
+  ],
+  "random_threshold_checks": 5000,
+  "algorithm_two_heterogeneous_counterexample": {
+    "algorithm_two_decision": true,
+    "general_decision": false
+  },
+  "zero_hit_fixed_cost_boundary": {
+    "algorithm_two_decision": true,
+    "cost_aware_decision": false
+  },
+  "scope": "教学参数；仅核对代数、阈值和边界，不是生产性能实验"
+}

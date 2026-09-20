@@ -1,0 +1,56 @@
+{
+  "description": "教学参数数值核验，不是线上实验",
+  "two_state": [
+    {
+      "hit_probability": 0.2,
+      "mean": 0.8400000000000001,
+      "second_moment": 0.808,
+      "rho": 0.504,
+      "waiting": 0.48870967741935484,
+      "response": 1.328709677419355
+    },
+    {
+      "hit_probability": 0.5,
+      "mean": 0.6,
+      "second_moment": 0.52,
+      "rho": 0.36,
+      "waiting": 0.24375,
+      "response": 0.84375
+    },
+    {
+      "hit_probability": 0.8,
+      "mean": 0.36,
+      "second_moment": 0.23199999999999996,
+      "rho": 0.216,
+      "waiting": 0.0887755102040816,
+      "response": 0.4487755102040816
+    }
+  ],
+  "same_token_ratio": [
+    {
+      "mean": 0.6,
+      "second_moment": 0.36,
+      "rho": 0.36,
+      "waiting": 0.16874999999999998,
+      "response": 0.7687499999999999
+    },
+    {
+      "mean": 0.6,
+      "second_moment": 0.52,
+      "rho": 0.36,
+      "waiting": 0.24375,
+      "response": 0.84375
+    }
+  ],
+  "routing": {
+    "old": 0.53,
+    "new": 0.9700000000000001,
+    "congested_old": 1.1800000000000002,
+    "gain_lower_bound": 0.12000000000000008
+  },
+  "checks": {
+    "grid_points": 1001,
+    "feedback_derivative_max_error": 4.474332016002336e-11,
+    "passed": true
+  }
+}
