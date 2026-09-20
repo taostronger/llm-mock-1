@@ -4,6 +4,10 @@
 
 这里生成的是**合成负载下的模型结果**。不启动vLLM、不加载模型、不需要GPU/NPU；模拟时延不是vLLM实测时延，也不是生产中TTFT降低10%的来源。
 
+## 先了解研究与实验
+
+[算法、测试场景与博士后研究报告总结](docs/ALGORITHMS_SCENARIOS_REPORT.md)：介绍两个研究问题、算法一与算法二、EPLB静态和动态方案、全部测试场景，以及结果和复现方法。
+
 ## 快速运行
 
 推荐Python 3.11及以上；本次参考运行的精确版本见 results/reference/run_manifest.json。在此目录执行：
