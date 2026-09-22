@@ -1,0 +1,23 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B"},"sequence":{"useMaxWidth":true,"wrap":true,"diagramMarginX":40,"diagramMarginY":24,"actorMargin":70,"width":220,"height":64,"boxMargin":12,"messageMargin":28}}}%%
+sequenceDiagram
+    autonumber
+    participant P as Planner / Optimizer
+    participant S as Round / Batch Scheduler
+    participant C as HCCL / Local Copy
+    participant M as Mapping / Selector
+    P->>P: 当前布局与目标布局求差
+    P->>S: 生成层级 ADD / REMOVE 指令
+    S->>S: 按目标 rank 冲突图合并为 round
+    S->>S: round 内按 source / target 去冲突拆成 batch
+    loop 每个 round / batch
+        S->>C: 准备 send / recv / local copy 描述
+        C->>C: 批量传输权重与本地复制
+        C-->>S: 全 rank 交换 round / batch 状态
+    end
+    S-->>P: 返回权重就绪状态
+    alt 全部目标权重就绪
+        P->>M: 原子更新 selector / mapping
+        M-->>P: 校验负载与映射一致性
+    else 传输或握手失败
+        P->>M: 保留旧映射，记录异常并进入下一窗口
+    end

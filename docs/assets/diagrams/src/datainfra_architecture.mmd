@@ -1,0 +1,28 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B","secondaryColor":"#EEF7F4"},"flowchart":{"curve":"basis","nodeSpacing":28,"rankSpacing":34,"htmlLabels":true}}}%%
+flowchart TB
+    U[企业用户]
+    SSO[IDaaS SSO<br/>工号 / 部门准入<br/>CorpUser 与登录审计]
+    UI[DataHub React / Play<br/>注册｜权限｜Token｜Chat]
+    API[datahub_extensions_api<br/>AuthMiddleware｜permission dependencies<br/>register / batch / query / mutate / chat]
+    subgraph CAP[平台能力层]
+      direction LR
+      SDK[datahub_register SDK<br/>Entity / Aspect / URN<br/>register / amend / search<br/>REST / Kafka Emitter<br/>global / domain Guard]
+      AGENT[Data Agent<br/>ChatService<br/>MCP Tool Adapter<br/>8 类元数据工具]
+    end
+    BASE[DataHub GMS / GraphQL / ES / Kafka]
+    U --> SSO --> UI --> API
+    API --> SDK
+    API --> AGENT
+    SDK --> BASE
+    AGENT --> SDK
+    AGENT --> BASE
+    M1[本人直接实现] -.-> SSO
+    M1 -.-> AGENT
+    M2[本人重构与实现] -.-> API
+    M2 -.-> SDK
+    classDef mine fill:#FFF0F0,stroke:#C62828,stroke-width:2.4px,color:#6B1717;
+    classDef platform fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef core fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    class SSO,API,SDK,AGENT mine;
+    class U,UI platform;
+    class BASE core;

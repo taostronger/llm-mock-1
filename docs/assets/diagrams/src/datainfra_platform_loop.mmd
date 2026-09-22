@@ -1,0 +1,30 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EEF7F4","primaryTextColor":"#173D35","primaryBorderColor":"#2E7D6A","lineColor":"#607D8B","secondaryColor":"#EAF2F8"},"flowchart":{"curve":"basis","nodeSpacing":26,"rankSpacing":32,"htmlLabels":true}}}%%
+flowchart TB
+    subgraph ROW1[接入与执行]
+      direction LR
+      A[外部数据源 / 存储] --> B[接入请求与预检查] --> C{任务类型}
+      C -->|轻量| D[本地执行]
+      C -->|重型| E[生产管理与 Runtime]
+    end
+    subgraph ROW2[资产沉淀]
+      direction LR
+      D --> F[Schema / 统计 / 异常样本]
+      E --> F
+      F --> G[元数据管理服务<br/>登记资产与运行事实]
+      G --> H[Kafka + DataHub + 检索索引]
+    end
+    subgraph ROW3[生产使用与治理反馈]
+      direction LR
+      I[生产作业绑定<br/>数据与 Pipeline 版本] --> J[Runtime 拉包执行]
+      J --> K[回写阶段、指标、血缘和产出]
+      H --> L[门户 / API / Data Agent<br/>统一查询与展示]
+    end
+    H --> I
+    K --> H
+    L -.治理反馈.-> B
+    classDef ingest fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef meta fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    classDef run fill:#FFF4E5,stroke:#B7791F,stroke-width:1.8px,color:#5F3B0A;
+    class A,B,C,F ingest;
+    class G,H,L meta;
+    class D,E,I,J,K run;

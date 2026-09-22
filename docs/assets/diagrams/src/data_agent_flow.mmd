@@ -1,0 +1,26 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B"},"flowchart":{"curve":"basis","nodeSpacing":24,"rankSpacing":30,"htmlLabels":true}}}%%
+sequenceDiagram
+    autonumber
+    actor U as 用户
+    participant API as FastAPI / ChatService
+    participant LLM as LLM
+    participant MCP as MCP Tool Adapter
+    participant SDK as DataHub / Register SDK
+    participant UI as SSE / Markdown Viewer
+    U->>API: 提交问题或资产操作
+    API->>API: 组装 system + history + tools
+    API->>LLM: 发起 SSE 流式请求
+    LLM-->>API: reasoning / content / tool_call 分片
+    alt 需要工具
+        API->>MCP: 累积参数并执行工具
+        MCP->>SDK: search / entity / lineage / register
+        SDK-->>MCP: 结构化结果 + entity link
+        MCP-->>API: tool result
+        API->>LLM: 追加 role=tool 后继续推理
+        LLM-->>API: 最终回答
+    else 无工具
+        LLM-->>API: 直接完成回答
+    end
+    API->>API: 保存 assistant 文本与会话
+    API-->>UI: SSE 输出内容和实体链接
+    UI-->>U: 可点击资产导航

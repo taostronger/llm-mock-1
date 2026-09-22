@@ -1,0 +1,32 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B","secondaryColor":"#EEF7F4"},"flowchart":{"curve":"basis","nodeSpacing":26,"rankSpacing":32,"htmlLabels":true}}}%%
+flowchart TB
+    subgraph DATA[请求数据面]
+      direction LR
+      C[客户端<br/>OpenAI / Anthropic 兼容请求] --> N[NGINX / Ingress]
+      N --> G[多副本 LiteLLM Gateway<br/>认证｜Key｜配额｜模型别名<br/>健康候选过滤｜日志与审计]
+      G --> R[api_key_router<br/>会话亲和｜负载候选｜哈希降级]
+    end
+    subgraph BACKENDS[模型后端]
+      direction LR
+      B1[模型后端 A<br/>P/D 分离或普通服务]
+      B2[模型后端 B]
+      BN[模型后端 N]
+    end
+    subgraph SUPPORT[状态支撑面与弹性控制面]
+      direction LR
+      PROM[(Prometheus<br/>running + waiting)] --> REF[周期刷新任务<br/>/model/info 自动发现<br/>聚合与漏刷诊断] --> REDIS[(Redis<br/>会话映射与 inflight)]
+      PROM --> AUTO[Autoscaler<br/>弹性控制面]
+    end
+    R --> B1
+    R --> B2
+    R --> BN
+    REDIS <--> R
+    G -->|/model/info| REF
+    AUTO -.调整实例 / 服务状态.-> B1
+    AUTO -.调整实例 / 服务状态.-> B2
+    classDef dataplane fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef state fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    classDef control fill:#FFF4E5,stroke:#B7791F,stroke-width:1.8px,color:#5F3B0A;
+    class C,N,G,R,B1,B2,BN dataplane;
+    class REDIS,PROM,REF state;
+    class AUTO control;

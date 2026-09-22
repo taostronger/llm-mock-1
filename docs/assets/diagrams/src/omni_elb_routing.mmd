@@ -1,0 +1,24 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B"},"flowchart":{"curve":"basis","nodeSpacing":24,"rankSpacing":28,"htmlLabels":true}}}%%
+flowchart TB
+    A[LiteLLM 已过滤出的健康候选] --> B{存在 user_id?}
+    B -->|是| C[查询 user_id → deployment_id 缓存]
+    C --> D{命中且目标仍健康?}
+    D -->|是| E[复用目标<br/>保持会话亲和]
+    D -->|否| F[批量读取候选 inflight]
+    F --> G{存在有效负载?}
+    G -->|是| H[按负载升序<br/>取最低 10% 候选]
+    H --> I[候选内随机选择]
+    G -->|否| J[按 user_id<br/>确定性哈希]
+    I --> K[写回带 TTL 和抖动的会话映射]
+    J --> K
+    K --> L[返回单个 deployment]
+    E --> L
+    B -->|否| M{Pipeline Key?}
+    M -->|是| N[返回全部健康候选<br/>交 LiteLLM 默认策略]
+    M -->|否| O[按 API Key / Hash<br/>确定性选择]
+    classDef input fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef gate fill:#FFF4E5,stroke:#B7791F,stroke-width:2px,color:#5F3B0A;
+    classDef action fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    class A,C,F,H input;
+    class B,D,G,M gate;
+    class E,I,J,K,L,N,O action;

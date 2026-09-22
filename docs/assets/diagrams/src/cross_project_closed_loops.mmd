@@ -1,0 +1,26 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B"},"flowchart":{"curve":"basis","nodeSpacing":26,"rankSpacing":32,"htmlLabels":true}}}%%
+flowchart TB
+    P[共同工程范式<br/><b>观测 → 决策 → 执行 → 验证</b>]
+    subgraph O[OmniPlacement / Omni-EPLB]
+      direction LR
+      O1[专家激活] --> O2[候选布局] --> O3[权重迁移] --> O4[selector / 负载复验]
+    end
+    subgraph D[DataInfra / DataHub]
+      direction LR
+      D1[身份 / 注册输入] --> D2[权限与实体决策] --> D3[MCP 写入] --> D4[GraphQL / 索引验证]
+    end
+    subgraph E[Omni-ELB / LiteLLM]
+      direction LR
+      E1[模型列表 / 负载指标] --> E2[候选集群] --> E3[路由与缓存] --> E4[健康 / 指标验证]
+    end
+    P --> O1
+    P --> D1
+    P --> E1
+    classDef common fill:#FFF4E5,stroke:#B7791F,stroke-width:2px,color:#5F3B0A;
+    classDef core fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef platform fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    classDef serving fill:#FFF0F0,stroke:#C62828,stroke-width:1.8px,color:#6B1717;
+    class P common;
+    class O1,O2,O3,O4 core;
+    class D1,D2,D3,D4 platform;
+    class E1,E2,E3,E4 serving;

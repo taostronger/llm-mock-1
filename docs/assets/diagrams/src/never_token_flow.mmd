@@ -1,0 +1,36 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EEF7F4","primaryTextColor":"#173D35","primaryBorderColor":"#2E7D6A","lineColor":"#607D8B"},"flowchart":{"curve":"basis","nodeSpacing":24,"rankSpacing":30,"htmlLabels":true}}}%%
+flowchart TB
+    subgraph READ[读取与并发控制]
+      direction LR
+      A[读取 neverTokenSecret Aspect] --> B{存在可用 Token?}
+      B -->|是| C[解密并写入短 TTL 缓存]
+      B -->|否| D[进入 userUrn 对应锁]
+    end
+    subgraph CREATE[锁内幂等创建]
+      direction LR
+      E[锁内再次读取] --> F{并发请求已创建?}
+      F -->|否| G[撤销旧 Token] --> H[创建 NO_EXPIRY PAT]
+    end
+    subgraph STORE[加密保存与代理使用]
+      direction LR
+      I[SecretService 加密明文] --> J[保存密文与 hash ID] --> K[Play 代理携带长期 Token]
+    end
+    subgraph FALLBACK[降级路径]
+      direction LR
+      L{辅助流程可用?} -->|是| M[访问 DataHub API]
+      L -->|否| N[回退 Session Token<br/>不阻断登录]
+      N --> M
+    end
+    D --> E
+    F -->|是| C
+    H --> I
+    J --> C
+    C --> K
+    K --> L
+    P[所有者或 Token 管理员] -.读取权限.-> A
+    classDef state fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef gate fill:#FFF4E5,stroke:#B7791F,stroke-width:2px,color:#5F3B0A;
+    classDef action fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    class A,C,D,E,G,H,I,J,K,P state;
+    class B,F,L gate;
+    class M,N action;

@@ -1,0 +1,32 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B","secondaryColor":"#EEF7F4"},"flowchart":{"curve":"basis","nodeSpacing":24,"rankSpacing":30,"htmlLabels":true}}}%%
+flowchart TB
+    subgraph OFF[离线 Pattern 闭环]
+      direction LR
+      O1[服务开启 dump] --> O2[汇集各 rank<br/>prefill / decode 激活]
+      O2 --> O3[标准化 layer × expert<br/>工作量]
+      O3 --> O4[分配副本并放置到 rank]
+      O4 --> O5[覆盖、容量、同卡唯一性校验]
+      O5 --> O6[输出 Pattern、热图与分析 CSV]
+      O6 --> O7[重新加载服务]
+    end
+    subgraph RUN[运行时动态闭环]
+      direction LR
+      R1[NPU 累加激活] --> R2[HCCL AllGather<br/>窗口差分]
+      R2 --> R3[逻辑专家负载与<br/>当前不均衡度]
+      R3 --> R4[枚举候选布局与冗余预算]
+      R4 --> R5{收益门禁}
+      R5 -->|接受| R6[生成 ADD / REMOVE]
+      R6 --> R7[分轮分批迁移权重]
+      R7 --> R8[更新 selector 并复验]
+      R8 --> R1
+      R5 -->|改善不足| R1
+    end
+    K[共同约束<br/>专家覆盖｜槽位容量｜同卡唯一性｜副本上限｜可回滚]
+    K -.约束.-> O4
+    K -.约束.-> R4
+    classDef offline fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef runtime fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    classDef gate fill:#FFF4E5,stroke:#B7791F,stroke-width:2px,color:#5F3B0A;
+    class O1,O2,O3,O4,O5,O6,O7 offline;
+    class R1,R2,R3,R4,R6,R7,R8 runtime;
+    class R5,K gate;

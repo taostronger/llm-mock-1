@@ -1,0 +1,25 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#718096","secondaryColor":"#EEF7F4","tertiaryColor":"#F8F3E8"},"flowchart":{"curve":"basis","nodeSpacing":34,"rankSpacing":38,"htmlLabels":true}}}%%
+flowchart TB
+    H["<b>工程主线持续扩展</b><br/>高性能推理 → 平台化治理 → 服务入口可靠性"]
+    T1["<b>2025-03 ～ 2025-07</b><br/>OmniPlacement 开源前研发"]
+    A1["C++ 优化器与负载均衡原型<br/>冗余、交换与多类候选算法<br/>Pattern、配置、UT 与调试工具"]
+    T2["<b>2025-07 ～ 2026-03</b><br/>OmniInfer 内工程化"]
+    A2["非均匀冗余与 Pattern 完善<br/>批量传输、动静态策略<br/>模型适配、UT 与 HCCL context"]
+    T3["<b>2026-04 起</b><br/>Omni-EPLB 独立 SDK"]
+    A3["从内部模块迁移为<br/>可独立构建、测试和接入的能力"]
+    T4["<b>2026-05 ～ 2026-09</b><br/>DataInfra / DataHub"]
+    A4["SSO、准入与权限体系<br/>注册 SDK、统一网关、Publisher<br/>无感 Token、Agent 与实体链接"]
+    T5["<b>2026-08 ～ 2026-09</b><br/>Omni-ELB / LiteLLM"]
+    A5["会话亲和与负载感知<br/>Redis 负载刷新自闭环<br/>Prometheus 指标修复"]
+    H --> T1 --> T2 --> T3 --> T4 --> T5
+    T1 --- A1
+    T2 --- A2
+    T3 --- A3
+    T4 --- A4
+    T5 --- A5
+    classDef head fill:#FFF4E5,stroke:#B7791F,stroke-width:2.4px,color:#5F3B0A;
+    classDef date fill:#EAF2F8,stroke:#2F5D7C,stroke-width:2px,color:#18324B;
+    classDef detail fill:#F8FAFC,stroke:#94A3B8,stroke-width:1.5px,color:#334155;
+    class H head;
+    class T1,T2,T3,T4,T5 date;
+    class A1,A2,A3,A4,A5 detail;

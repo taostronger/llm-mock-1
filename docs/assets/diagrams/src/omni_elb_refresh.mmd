@@ -1,0 +1,30 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EEF7F4","primaryTextColor":"#173D35","primaryBorderColor":"#2E7D6A","lineColor":"#607D8B"},"flowchart":{"curve":"basis","nodeSpacing":24,"rankSpacing":30,"htmlLabels":true}}}%%
+flowchart TB
+    subgraph DISCOVERY[部署发现]
+      direction LR
+      A[LiteLLM /model/info] --> B[按 model_name 聚合<br/>提取 model_info.id]
+      B --> C[确定 Prometheus 模型名<br/>形成模型组—部署映射]
+      M[接口不可用时<br/>显式配置降级] -.-> C
+    end
+    subgraph METRICS[指标聚合]
+      direction LR
+      D[Prometheus<br/>P 侧 running / waiting] --> E[按 cluster + instance 聚合]
+      E --> F[外连接 running 与 waiting] --> G[按 cluster 汇总 inflight]
+    end
+    C --> H{deployment ID<br/>匹配 cluster label?}
+    G --> H
+    subgraph OUTPUT[写入与诊断]
+      direction LR
+      I[写入 Redis<br/>model_group : deployment_id : inflight] --> K[请求路由 MGET]
+      J[漏刷清单 + 近似名称诊断] --> L[告警与配置修复]
+    end
+    H -->|匹配| I
+    H -->|未匹配| J
+    classDef source fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef action fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    classDef gate fill:#FFF4E5,stroke:#B7791F,stroke-width:2px,color:#5F3B0A;
+    classDef warn fill:#FFF0F0,stroke:#C62828,stroke-width:2px,color:#6B1717;
+    class A,D,M source;
+    class B,C,E,F,G,I,K action;
+    class H gate;
+    class J,L warn;

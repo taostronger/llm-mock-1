@@ -1,0 +1,31 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EAF2F8","primaryTextColor":"#18324B","primaryBorderColor":"#2F5D7C","lineColor":"#607D8B"},"flowchart":{"curve":"basis","nodeSpacing":24,"rankSpacing":30,"htmlLabels":true}}}%%
+flowchart TB
+    subgraph ROW1[企业认证与准入]
+      direction LR
+      A[浏览器] --> B[企业认证页]
+      B --> C[GMS callback<br/>提取用户与工号]
+      C --> D{白名单 / 部门准入}
+      D -->|拒绝| X[记录拒绝原因<br/>终止登录]
+    end
+    subgraph ROW2[DataHub 身份建立]
+      direction LR
+      E[302 到 Play callback] --> F[从 Servlet Session<br/>取得 UserInfo]
+      F --> G[AuthenticationExtractionFilter<br/>注入标准请求头]
+      G --> H[IDaaSAuthenticator<br/>建立 DataHub Authentication]
+    end
+    subgraph ROW3[用户供应与会话]
+      direction LR
+      I[UserProvisioningService<br/>创建 / 更新 CorpUser] --> J[生成平台 Session] --> K[进入主页]
+    end
+    D -->|通过| E
+    H --> I
+    C -.审计.-> L[登录尝试记录]
+    D -.审计.-> L
+    classDef auth fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef gate fill:#FFF4E5,stroke:#B7791F,stroke-width:2px,color:#5F3B0A;
+    classDef ok fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    classDef error fill:#FFF0F0,stroke:#C62828,stroke-width:2px,color:#6B1717;
+    class A,B,C,E,F,G,H auth;
+    class D gate;
+    class I,J,K,L ok;
+    class X error;

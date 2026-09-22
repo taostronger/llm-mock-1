@@ -1,0 +1,37 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Microsoft YaHei","primaryColor":"#EEF7F4","primaryTextColor":"#173D35","primaryBorderColor":"#2E7D6A","lineColor":"#607D8B"},"flowchart":{"curve":"basis","nodeSpacing":22,"rankSpacing":28,"htmlLabels":true}}}%%
+flowchart TB
+    subgraph IN[输入与身份]
+      direction LR
+      A[输入<br/>dict｜YAML｜JSON｜文件｜kwargs] --> B[解析、优先级合并与旧字段迁移]
+      B --> C[从登录身份 / 服务 Token<br/>强制注入 creator]
+      C --> D{SDK 权限守卫}
+      D -->|拒绝| X[结构化错误<br/>message / errors / trace_id]
+    end
+    subgraph CHECK[建模、校验与幂等]
+      direction LR
+      E[构建 MetadataEntity、URN 与 MCP] --> F[业务字段 + Domain 校验]
+      F --> G[按 URN 获取并发注册锁] --> H{实体已存在?}
+    end
+    subgraph DEP[依赖与发布]
+      direction LR
+      I[skip / overwrite 判定] --> J[Task 上游 Dataset / Pipeline<br/>依赖检查] --> K{发布通道}
+    end
+    subgraph OUT[确认与返回]
+      direction LR
+      L[REST Emitter] --> N[轮询确认实体可查询]
+      M[Kafka Emitter] --> N
+      N --> O[返回 success / message / trace_id]
+    end
+    D -->|通过| E
+    H -->|是| I
+    H -->|否| J
+    K -->|REST| L
+    K -->|Kafka| M
+    classDef input fill:#EAF2F8,stroke:#2F5D7C,stroke-width:1.8px,color:#18324B;
+    classDef guard fill:#FFF4E5,stroke:#B7791F,stroke-width:2px,color:#5F3B0A;
+    classDef action fill:#EEF7F4,stroke:#2E7D6A,stroke-width:1.8px,color:#173D35;
+    classDef error fill:#FFF0F0,stroke:#C62828,stroke-width:2px,color:#6B1717;
+    class A,B,C,E input;
+    class D,H,K guard;
+    class F,G,I,J,L,M,N,O action;
+    class X error;
