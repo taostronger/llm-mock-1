@@ -1,10 +1,10 @@
-# 大模型系统与智能体工程：Beamer 项目介绍
+# 大模型基础设施与 Agent 工程：面试项目介绍
 
-这份中文技术交流稿介绍专家负载均衡、元数据治理、推理路由、服务 simulator，以及 DELM 适配与 Harness2。面向对外学术和工程交流，保留个人贡献与团队/上游能力的区别。封面不使用企业标志，正文没有致谢页。
+面向不熟悉这些项目的面试官，先介绍各个大项目的目标、整体架构和上下游关系，再定位个人职责、实际使用的技术，以及代表性实现。内容覆盖推理系统、数据平台、网关、simulator 与 Agent 工程。保留个人贡献与团队/上游能力的区别；不使用企业标志或致谢页。
 
-- [放映 PDF](project-introduction.pdf)
+- [面试放映 PDF](project-introduction.pdf)
 - [可编辑 Beamer 源文件](project-introduction.tex)
-- [讲述提示](speaker-notes.md)
+- [逐页讲述提示与开场话术](speaker-notes.md)
 - [Simulator 独立报告](../simulator-technical-report.md)
 - [DELM / Harness2 独立报告](../delm-harness2-technical-report.md)
 
@@ -22,9 +22,18 @@ python build.py
 
 ## 内容与使用
 
-共 42 页，正文 38 页、技术附录 4 页。正文按五个方向展开，附录包含数学性质、统计口径、排队分析与资料入口。短交流可按讲述提示选取 14 页；完整讲述适合约 40–50 分钟并另留问答时间。
+共 44 页：**26 页面试主讲＋18 页技术备份**。主讲页脚显示“页码/26”，备份页显示“备份 1–18”。主讲适合约 25–35 分钟；15–20 分钟可按讲述提示选页，备份无需顺序播放。
 
-本次工程增强增加 8 页：Pattern 工具链、框架与特殊专家适配、注册 SDK 分层、部署发现与负载刷新、simulator 数据契约、状态访问优化、Agent runner 契约，以及配置采纳与产物回收。技术细节与既有两份专题报告、工程报告和源实现核对，不新增未经测量的性能点值。
+| 主讲页 | 项目及重点 |
+|---|---|
+| 1–2 | 项目全景与个人工作范围 |
+| 3–10 | OmniInfer 总体框架、OmniPlacement 能力、Omni-EPLB 独立 SDK；个人核心与外围协作、接口及交付 |
+| 11–14 | 企业数据工程平台与上游 DataHub；注册 SDK、身份权限、页面与 Data Agent |
+| 15–19 | Omni-ELB 的 LiteLLM 路径与个人路由/状态工作；simulator 的项目背景与接口 |
+| 20–24 | 编码 Agent 平台整体；Delm 与 Harness² 的位置、个人实现和可靠性案例 |
+| 25–26 | 技术栈与可进一步展开的代表问题 |
+
+大项目、上游框架和本人模块分别归因。Omni-EPLB 不代表替代全部 OmniInfer；独立交付不重复统计同源算法。内部平台采用功能名称介绍。数据平台的 React/TypeScript 与编码 Agent 平台的原生 JavaScript/CodeMirror 分别说明。
 
 若只转交演示稿源码，可把 `.tex` 与 `data/` 放在同一目录，再运行两遍 `xelatex project-introduction.tex`。这种方式直接使用随附图表摘录，不需要 Python 或完整实验仓库；从仓库重新同步数据则使用上面的 `build.py`。
 
