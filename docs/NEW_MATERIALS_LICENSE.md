@@ -8,6 +8,7 @@
 - `beamer/build.py`
 - `beamer/data/eplb.csv`、`beamer/data/routing.csv`（公开合成参考结果的绘图摘录）
 - `beamer/README.md`、`beamer/speaker-notes.md`
+- `interview-preparation/` 中的原创学习手册（Markdown、Word、PDF）、分章、阅读说明、构建工具及合成练习脚本
 
 此许可仅适用于以上列出的新增文字、源文件与演示稿，不改变仓库其他文件的许可状态。材料提及的上游方法、商标、第三方代码和其他项目源码不因本文获得新的授权；原有第三方许可继续有效。源项目未随这些报告分发。
 

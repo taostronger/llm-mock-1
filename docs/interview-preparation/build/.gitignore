@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.log
+*.raw.docx
+*.structure.json
+reference.docx
+smoke.docx
+validation-report.json
+agent-sequence-probe.json
+manual-pages/
+smoke-pages/
+normal-render-attempt/

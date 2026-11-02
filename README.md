@@ -10,6 +10,7 @@
 
 - [面试项目介绍 Beamer（PDF）](docs/beamer/project-introduction.pdf)：26 页主讲＋18 页技术备份，先介绍 OmniInfer、Omni-EPLB、数据平台、网关与 Agent 大项目，再展开个人模块和技术栈；无企业标志、无致谢页。
 - [Beamer 源码与编译说明](docs/beamer/README.md)：提供可编辑 `.tex`、图表原始数据入口和讲述提示。
+- [项目面试准备手册（Word / PDF / Markdown）](docs/interview-preparation/README.md)：54页学习稿，覆盖五个项目方向、66组深入问答、10个练习及源码阅读路线，附分章和构建工具。
 - [Simulator 独立技术报告](docs/simulator-technical-report.md)：真实插件接入、开环/闭环、经验后端与验证边界。
 - [Delm / Harness² 独立技术报告](docs/delm-harness2-technical-report.md)：协作运行时、配置调优适配、可靠交付与真实回归结果。
 
